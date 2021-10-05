@@ -11,11 +11,28 @@ import static org.junit.jupiter.api.Assertions.*;
 class GrupoTest {
 
     private Grupo grupoBase;
-//    criar aluno base
+    private Aluno aluno;
+    private Aluno aluno2;
+    private Aluno aluno3;
+    private Aluno aluno4;
 
     @BeforeEach
     void criaGrupoBase() {
-        this.grupoBase = new Grupo("Lista", "2");
+        this.grupoBase = new Grupo("Listas", "");
+        this.aluno = new Aluno("250", "Gabriel Reyes", "Computação");
+        this.aluno2 = new Aluno("251", "Ana Reyes", "Computação");
+        this.aluno3 = new Aluno("252", "Maria Reyes", "Computação");
+        this.aluno4 = new Aluno("201","Torbjorn Lindholm", "Torbjorn Lindholm");
+    }
+
+    @Test
+    void cadastrarGrupoSemRestricao() {
+        new Grupo("Programação OO", "");
+    }
+
+    @Test
+    void cadastrarGrupoComRestricaoTamanho() {
+        new Grupo("Programação OO", "10");
     }
 
     @Test
@@ -38,60 +55,44 @@ class GrupoTest {
         }
     }
 
-
-    @Test
-    void entraAlunoNoGrupoBase() {
-        Aluno aluno = new Aluno("250", "Gabriel Reyes", "Computação");
-        Aluno aluno2 = new Aluno("251", "Ana Reyes", "Computação");
-        Aluno aluno3 = new Aluno("252", "Maria Reyes", "Computação");
-        grupoBase.entraAluno(aluno);
-        grupoBase.entraAluno(aluno2);
-        boolean adicionaNoGrupo = grupoBase.entraAluno(aluno3);
-        assertFalse(adicionaNoGrupo);
-    }
-
     @Test
     void entraNoGrupoComTamanhoVazio() {
-        Grupo novoGrupo = new Grupo("Exercicios", "");
-        Aluno aluno = new Aluno("250", "Gabriel Reyes", "Computação");
-        Aluno aluno2 = new Aluno("251", "Ana Reyes", "Computação");
-        Aluno aluno3 = new Aluno("252", "Maria Reyes", "Computação");
-        novoGrupo.entraAluno(aluno);
-        novoGrupo.entraAluno(aluno2);
-        boolean adicionaNoGrupo = novoGrupo.entraAluno(aluno3);
-        assertTrue(adicionaNoGrupo);
+        boolean adicionaAluno1 = grupoBase.entraAluno(this.aluno);
+        assertTrue(adicionaAluno1);
+        boolean adicionaAluno2 = grupoBase.entraAluno(this.aluno2);
+        assertTrue(adicionaAluno2);
+        boolean adicionaAluno3 = grupoBase.entraAluno(this.aluno3);
+        assertTrue(adicionaAluno3);
     }
 
     @Test
     void testeAlunoPertenceAoGrupo() {
-        Aluno aluno = new Aluno("250", "Gabriel Reyes", "Computação");
-        grupoBase.entraAluno(aluno);
+        grupoBase.entraAluno(this.aluno);
         boolean pertence = grupoBase.pertenceAoGrupo(aluno);
         assertTrue(pertence);
     }
 
     @Test
     void testeAlunoNaoPertenceAoGrupo() {
-        Aluno aluno = new Aluno("250", "Gabriel Reyes", "Computação");
-        boolean pertence = grupoBase.pertenceAoGrupo(aluno);
+        boolean pertence = grupoBase.pertenceAoGrupo(this.aluno);
         assertFalse(pertence);
     }
 
     @Test
     void testEqualsObject() {
-        Grupo novoGrupo = new Grupo("Lista", "2");
+        Grupo novoGrupo = new Grupo("Listas", "10");
         assertEquals(grupoBase, novoGrupo);
     }
 
     @Test
     void testEqualsObjectGruposDiferentes() {
-        Grupo novoGrupo = new Grupo("Exercicios", "");
+        Grupo novoGrupo = new Grupo("Programação OO", "");
         assertNotEquals(grupoBase, novoGrupo);
     }
 
     @Test
     void testHashCode() {
-        Grupo novoGrupo = new Grupo("Lista", "2");
+        Grupo novoGrupo = new Grupo("Listas", "10");
         assertEquals(grupoBase.hashCode(), novoGrupo.hashCode());
     }
 }

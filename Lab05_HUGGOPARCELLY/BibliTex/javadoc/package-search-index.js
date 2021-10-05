@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"BibliTex.Controllers"},{"l":"BibliTex.Intefaces"},{"l":"BibliTex.Logger"},{"l":"BibliTex.Transforma"}]

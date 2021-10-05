@@ -1,13 +1,20 @@
 package controle;
 
-import java.util.Locale;
 import java.util.Scanner;
 
+/**
+ * Interface do usuário com menus texto para manipular o cadastro dos alunos e de grupos
+ *
+ * @author Huggo Parcelly
+ */
 public class Main {
 
+    /**
+     * Função principal do sistema
+     * @param args
+     */
     public static void main(String[] args) {
         Sistema sistema = new Sistema();
-
         Scanner scanner = new Scanner(System.in);
         String escolha = "";
         while (!escolha.equals("S")) {
@@ -17,7 +24,7 @@ public class Main {
     }
 
     /**
-     * Exibe o menu e captura a escolha do/a usuário/a.
+     * Exibe o menu e captura a escolha do usuário.
      *
      * @param scanner Para captura da opção do usuário.
      * @return O comando escolhido.
@@ -38,6 +45,13 @@ public class Main {
         return scanner.next().toUpperCase();
     }
 
+    /**
+     * Interpreta a opção escolhida pelo usuário
+     *
+     * @param opcao Opção digitada
+     * @param sistema Sistema que é manipulado
+     * @param scanner Objeto scanner para inputs
+     */
     private static void comando(String opcao, Sistema sistema, Scanner scanner) {
         switch (opcao) {
             case "C":
@@ -69,11 +83,23 @@ public class Main {
         }
     }
 
+    /**
+     * Função que exibe os alunos que participaram na aula.
+     *
+     * @param sistema O sistema que é manipulado
+     */
     private static void exibeAlunoParticipante(Sistema sistema) {
         System.out.print("\nAlunos: ");
         System.out.println(sistema.alunosParticipantes());
     }
 
+    /**
+     * Função que registra um aluno que participou durante a aula
+     * O registro é feito através da matrícula do aluno
+     *
+     * @param sistema O sistema que é manipulado
+     * @param scanner Objeto scanner para inputs
+     */
     private static void registraAlunoParticipante(Sistema sistema, Scanner scanner) {
         System.out.print("\nRegistrar aluno participante");
         scanner.nextLine();
@@ -88,6 +114,13 @@ public class Main {
         }
     }
 
+    /**
+     * Função que exibe os grupos que o aluno faz parte
+     * A verificação é feita através da matrícula do aluno
+     *
+     * @param sistema O sistema que é manipulado
+     * @param scanner Objeto scanner para inputs
+     */
     private static void exibeGruposPorAluno(Sistema sistema, Scanner scanner) {
         System.out.print("\nGrupos que o aluno faz parte");
         scanner.nextLine();
@@ -97,6 +130,16 @@ public class Main {
         System.out.print("Grupos: \n" + grupos);
     }
 
+    /**
+     * Função que adiciona e verifica a pertinência de um aluno em um grupo
+     * Ao selecionar a opção "A", o usuário pode adicionar um aluno a um grupo,
+     * através da função "adicionaAlunoGrupo".
+     * Ao selecionar a opção "P", o usuário verifica se o aluno pertence ou não a um grupo,
+     * através da função "verificaAlunoNoGrupo"
+     *
+     * @param sistema O sistema que é manipulado
+     * @param scanner Objeto scanner para inputs
+     */
     private static void alocarOuPertinencia(Sistema sistema, Scanner scanner) {
         System.out.print("\n(A)locar Aluno ou (P)ertinência a Grupo? ");
         scanner.nextLine();
@@ -110,6 +153,13 @@ public class Main {
         }
     }
 
+    /**
+     * Função que verifica se o aluno está em um grupo
+     * A pesquisa é realizada através do nome do grupo e da matricula do aluno
+     *
+     * @param sistema O sistema que é manipulado
+     * @param scanner Objeto scanner para inputs
+     */
     private static void verificaAlunoNoGrupo(Sistema sistema, Scanner scanner) {
         System.out.print("\nVerificar pertinencia do aluno no grupo");
         System.out.print("\nGrupo: ");
@@ -119,6 +169,13 @@ public class Main {
         System.out.println(sistema.verificarAlunoNoGrupo(matricula, nomeGrupo));
     }
 
+    /**
+     * Função que adiciona o aluno ao grupo
+     * O aluno é adicionado ao grupo pela matrícula associando com o nome do grupo
+     *
+     * @param sistema O sistema que é manipulado
+     * @param scanner Objeto scanner para inputs
+     */
     private static void adicionaAlunoGrupo(Sistema sistema, Scanner scanner) {
         System.out.print("\nAlocar aluno em grupo");
         System.out.print("\nMatricula: ");
@@ -128,6 +185,13 @@ public class Main {
         System.out.println(sistema.adicionarAlunoNoGrupo(matricula, grupo));
     }
 
+    /**
+     * Função que cadastra um grupo
+     * O cadastrado é feito com o nome do grupo e o tamanho que é opcional
+     *
+     * @param sistema O sistema que é manipulado
+     * @param scanner Objeto scanner para inputs
+     */
     private static void cadastraGrupo(Sistema sistema, Scanner scanner) {
         System.out.print("\nCadastrar Grupo");
         System.out.print("\nGrupo: ");
@@ -143,6 +207,13 @@ public class Main {
 
     }
 
+    /**
+     * Função que cadastra os alunos no sistema
+     * O cadastro é feito com a matrícula, nome e curso
+     *
+     * @param sistema O sistema que é manipulado
+     * @param scanner Objeto scanner para inputs
+     */
     private static void cadastraAluno(Sistema sistema, Scanner scanner) {
         System.out.print("\nCadastro de Aluno");
         System.out.print("\nMatricula: ");
@@ -163,6 +234,13 @@ public class Main {
         }
     }
 
+    /**
+     * Exibe os detalhes dos alunos
+     * A busca é feita através da matrícula
+     *
+     * @param sistema O sistema que é manipulado
+     * @param scanner Objeto scanner para inputs
+     */
     private static void exibeAluno(Sistema sistema, Scanner scanner) {
         System.out.print("\nConsultar de Aluno");
         System.out.print("\nMatricula: ");
@@ -177,6 +255,9 @@ public class Main {
         }
     }
 
+    /**
+     * Função que sai da aplicação
+     */
     private static void sai() {
         System.out.println("\nAté logo...");
         System.exit(0);
